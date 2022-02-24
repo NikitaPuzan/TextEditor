@@ -42,7 +42,7 @@ const NoteSearch = ({setSearchValue, filteredNotes, deleteNote, notes, setNotes,
             </li>)
           }
         </ul>
-        <input type="search" placeholder="Search..."
+        <input type="search" placeholder="Press enter to add tag.."
                onKeyUp={event => event.key === "Enter" ? addTags(event) : null}
         />
       </div>
