@@ -1,41 +1,40 @@
-import React, {useState} from 'react';
-import {Button} from "@mui/material";
+import React from 'react';
+import Preview from "./Preview";
 
-const CreateNotes = ({notes, setNotes}) => {
-  const [text, setText] = useState('')
-  const [title, setTitle] = useState('')
+const EditNotes = ({selectedNote, onUpdateNote}) => {
+  const onEditField = (field, value) => {
+    onUpdateNote({
+      ...selectedNote,
+      [field]: value,
+    })
+  }
 
-  const changeText = event => {
-    setText(event.target.value)
+  const handleChange = (e) => {
+    selectedNote.hashtag = e.target.value.split(/(#[a-z\d-]+)/ig).filter(element => element.charAt(0) === '#')
+    onEditField("body", e.target.value)
   }
-  const changeTitle = event => {
-    setTitle(event.target.value)
-  }
-  const addNote = () => {
-    let newNote = {
-      id: Date.now(),
-      title: title,
-      body: text
-    }
-    setNotes([newNote, ...notes])
-    setText('')
-  }
+
+  if (!selectedNote) return <div className="missing-note">No Selected Note</div>;
+
   return (
-    <div className="editor">
-      <div className="title-editor">
-        <input type="text" value={title} placeholder="Enter your title here..." onChange={changeTitle}/>
-      </div>
-      <div className="text-editor">
+    <div className="content">
+      <div className="editor">
+        <div className="title-editor">
+          <input type="text" value={selectedNote.title} placeholder="Title here.."
+                 onChange={event => onEditField("title", event.target.value)}/>
+        </div>
+        <div className="text-editor">
         <textarea
-          placeholder="Enter your note here..."
+          placeholder="Enter your note here.."
           rows={5}
-          value={text}
-          onChange={changeText}
+          value={selectedNote.body}
+          onChange={event => handleChange(event)}
         />
-        <Button variant="contained" onClick={addNote}>Add</Button>
+        </div>
       </div>
+      <Preview selectedNote={selectedNote}/>
     </div>
   )
 }
 
-export default CreateNotes
+export default EditNotes

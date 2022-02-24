@@ -1,25 +1,38 @@
-import React, {useState} from 'react';
-import DeleteIcon from "@mui/icons-material/Delete";
+import React, {useState} from 'react'
+import DeleteIcon from "@mui/icons-material/Delete"
+import Notes from "./Notes";
+import {Button} from "@mui/material";
 
-const SearchNotes = ({setSearchValue}) => {
+const NoteSearch = ({setSearchValue, filteredNotes, deleteNote, notes, setNotes, setSelectedNote}) => {
   const [tags, setTags] = useState([])
 
   const addTags = event => {
     if (event.target.value !== "") {
       setTags([...tags, event.target.value])
+      let value = event.target.value.toLowerCase()
+      setSearchValue(value);
       event.target.value = ""
     }
   }
   const removeTags = indexToRemove => {
-    setTags([...tags.filter((_, index) => index !== indexToRemove)])
+    setTags(tags.filter((_, index) => index !== indexToRemove))
+    setSearchValue('')
   }
-  const handleSearch = event => {
-    let value = event.target.value.toLowerCase()
-    setSearchValue(value);
+  const addNote = () => {
+    let newNote = {
+      id: Date.now(),
+      title: "New Note",
+      body: ""
+    }
+    setNotes([newNote, ...notes])
   }
 
   return (
-    <div>
+    <div className="sidebar">
+      <div className="header">
+        <h2 >Text editor with tags</h2>
+        <Button variant="contained" onClick={addNote}>Add new note</Button>
+      </div>
       <div className="tags-input">
         <ul id="tags">
           {
@@ -30,14 +43,12 @@ const SearchNotes = ({setSearchValue}) => {
           }
         </ul>
         <input type="search" placeholder="Search..."
-               onChange={(event) => {
-                 handleSearch(event)
-               }}
                onKeyUp={event => event.key === "Enter" ? addTags(event) : null}
         />
       </div>
+      <Notes filteredNotes={filteredNotes}  deleteNote={deleteNote} setSelectedNote={setSelectedNote}/>
     </div>
-  );
-};
+  )
+}
 
-export default SearchNotes;
+export default NoteSearch
