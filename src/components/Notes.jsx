@@ -3,7 +3,6 @@ import {IconButton} from "@mui/material"
 import DeleteIcon from "@mui/icons-material/Delete"
 
 const Notes = ({deleteNote, filteredNotes, setSelectedNote}) => {
-  console.log(filteredNotes)
   return (
     <div className="note">
       {

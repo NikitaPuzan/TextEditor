@@ -19,12 +19,13 @@ const NoteSearch = ({setSearchValue, filteredNotes, deleteNote, notes, setNotes,
     setSearchValue('')
   }
   const addNote = () => {
-    let newNote = {
+    const newNote = {
       id: Date.now(),
       title: "New Note",
-      body: ""
+      body: "",
+      hashtag: []
     }
-    setNotes([newNote, ...notes])
+    setNotes([ newNote, ...notes])
   }
 
   return (
