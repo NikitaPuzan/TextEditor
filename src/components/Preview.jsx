@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React from 'react';
 import EditIcon from '@mui/icons-material/Edit';
-import {Button, IconButton} from "@mui/material";
+import { IconButton} from "@mui/material";
 
 const Preview = ({selectedNote, setToggle}) => {
 
@@ -12,7 +12,7 @@ const Preview = ({selectedNote, setToggle}) => {
           <EditIcon fontSize="small"/>
         </IconButton>
         </h1>
-        {selectedNote.body}
+        <p>{selectedNote.body}</p>
       </div>
     </div>
   );
