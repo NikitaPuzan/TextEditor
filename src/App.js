@@ -47,7 +47,7 @@ function App() {
                   deleteNote={deleteNote}
                   notes={notes} setNotes={setNotes}
       />
-        <EditNotes  onUpdateNote={onUpdateNote} selectedNote={getSelectedNote()}/>
+      <EditNotes  onUpdateNote={onUpdateNote} selectedNote={getSelectedNote()}/>
     </div>
   )
 }
