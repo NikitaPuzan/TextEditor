@@ -15,7 +15,7 @@ const Notes = ({deleteNote, filteredNotes, setSelectedNote}) => {
               </IconButton>
             </div>
           </div>
-          {hashtag.length !== 0 && <span className='hashtag'>{hashtag}</span>}
+            {hashtag.length !== 0 && hashtag.map((tag, index) => <span key={index} className='hashtag'>{tag}</span>)}
         </div>)
       }
     </div>

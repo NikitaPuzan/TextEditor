@@ -9,7 +9,7 @@ const Preview = ({selectedNote, setToggle}) => {
       <div className="preview-note">
         <h1>{selectedNote.title}
         <IconButton color="error" onClick={() => setToggle(true)}>
-          <EditIcon fontSize="small"/>
+          <EditIcon fontSize="medium" variant="contained"/>
         </IconButton>
         </h1>
         <p>{selectedNote.body}</p>
